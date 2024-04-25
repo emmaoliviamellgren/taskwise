@@ -1,12 +1,17 @@
 import Todos from './Todos.jsx'
+import { Input } from '@/components/ui/input.jsx'
+import { ModeToggle } from '@/components/mode-toggle.jsx'
 
 const page = () => {  
   
   return (
-    <div className="h-screen w-screen flex justify-center bg-slate-900">
-      <h1 className="mt-20 text-3xl font-semibold">My todos</h1>
-      <div><Todos /></div>
-      </div>
+    <div className='w-screen min-h-screen bg-slate-900/70'>
+      <ModeToggle />
+      <main className="flex flex-col justify-center items-center  gap-24">
+        <div><Input /></div>
+        <div className=''><Todos /></div>
+      </main>
+    </div>
   )
 }
 

@@ -1,13 +1,15 @@
 
 const Todos = async () => {
   
-    const res = await fetch('https://dummyjson.com/todos')
+    const res = await fetch('https://dummyjson.com/todos?limit=10')
     const todos = await res.json()
   
   return (
-    <>
-      {todos.map(todo => (<p key={todo.id}>{todo.todo}</p>))}   
-    </> 
+    <ul className="">
+      {todos.todos?.map(todo => (
+        <li key={todo.id} className="my-6">{todo.todo}</li>
+      ))}
+    </ul> 
   )
 }
 
