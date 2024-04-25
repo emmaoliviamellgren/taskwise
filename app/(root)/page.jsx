@@ -1,4 +1,4 @@
-import Todos from './Todos.jsx'
+import Todos from '../../components/todos.jsx'
 import { Input } from '@/components/ui/input.jsx'
 import { ModeToggle } from '@/components/mode-toggle.jsx'
 
