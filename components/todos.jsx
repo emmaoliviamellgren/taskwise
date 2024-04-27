@@ -1,35 +1,51 @@
+'use client';
+
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { getAllTodos } from '@/lib/handleTodos';
+import { useState, useEffect } from 'react';
 
-const Todos = async () => {
-    const res = await fetch('https://dummyjson.com/todos?limit=10');
-    const todos = await res.json();
+const Todos = () => {
+    const [todos, setTodos] = useState([]);
+
+    useEffect(() => {
+        const fetchTodos = async () => {
+            const fetchedTodos = await getAllTodos();
+            setTodos(fetchedTodos);
+        };
+
+        fetchTodos();
+    }, []);
 
     return (
         <Table>
             <TableHeader>
                 <TableRow>
-                    <TableHead className='w-[300px]'>My todos <span className='ml-2 bg-muted/60 p-1 rounded-md text-xs'>{todos.todos.length} things to do</span></TableHead>
+                    <TableHead className='w-[300px]'>
+                        My todos{' '}
+                        <span className='ml-2 bg-muted/60 p-1 rounded-md text-xs'>
+                            {todos.todos && todos.todos.length} things to do
+                        </span>
+                    </TableHead>
                     <TableHead className='text-right'>Status</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
                 {todos.todos?.map((todo) => (
-                    <TableRow key={todo.id}>
+                    <TableRow key={todo.todo}>
                         <TableCell
                             key={todo.id}
                             className='font-medium'>
                             {todo.todo}
                         </TableCell>
                         <TableCell
-                            key={todo.id}
+                            key={todo.completed}
                             className='text-right text-muted-foreground'>
                             {todo.completed ? 'Completed' : 'Not Completed'}
                         </TableCell>
