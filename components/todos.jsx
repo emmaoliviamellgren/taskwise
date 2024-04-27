@@ -11,6 +11,9 @@ import {
 import { getAllTodos } from '@/lib/handleTodos';
 import { useState, useEffect } from 'react';
 
+import { CircleDashed } from 'lucide-react';
+
+
 const Todos = () => {
     const [todos, setTodos] = useState([]);
 
@@ -23,11 +26,15 @@ const Todos = () => {
         fetchTodos();
     }, []);
 
+    const toggleCompleted = (id) => {
+        todos.todos.map(todo => todo.id === id ? {...todo, completed: !todo.completed} : todo)
+    }
+
     return (
         <Table>
             <TableHeader>
                 <TableRow>
-                    <TableHead className='w-[300px]'>
+                    <TableHead className='w-[500px]'>
                         My todos{' '}
                         <span className='ml-2 bg-muted/60 p-1 rounded-md text-xs'>
                             {todos.todos && todos.todos.length} things to do
@@ -41,7 +48,8 @@ const Todos = () => {
                     <TableRow key={todo.todo}>
                         <TableCell
                             key={todo.id}
-                            className='font-medium'>
+                            className='font-medium flex items-top gap-5'>
+                                <span><input type="checkbox" checked={todo.completed} className='size-4 hover:text-white cursor-pointer' onChange={() => toggleCompleted(todo.id)}/></span>
                             {todo.todo}
                         </TableCell>
                         <TableCell

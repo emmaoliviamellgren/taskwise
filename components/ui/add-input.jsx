@@ -1,19 +1,45 @@
+"use client"
+
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { getRandomTodo, addNewDocument } from '@/lib/handleTodos';
+import { useState, useEffect } from 'react';
 
-const AddInput = () => {
+
+export const AddInput = () => {
+
+    const [randomTodo, setRandomTodo] = useState([])
+    const [inputValue, setInputValue] = useState('');
+
+    const fetchTodo = async () => {
+        const fetchedTodo = await getRandomTodo();
+        setRandomTodo(fetchedTodo);
+    };
+
+    useEffect(() => {
+        fetchTodo()
+    }, []);
+
+    const addToDatabase = async () => {
+        try {
+            await addNewDocument(inputValue);
+            console.log(inputValue)
+            setInputValue('');
+        } catch (error) {
+            console.error('Error adding document: ', error);
+        }
+    };
+
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -25,21 +51,24 @@ const AddInput = () => {
                 </Button>
             </DialogTrigger>
             <DialogContent className='sm:max-w-[425px]'>
-                <DialogHeader>
+                <DialogHeader className="items-center my-4">
                     <DialogTitle>
                         What do you need to get done today?
                     </DialogTitle>
                 </DialogHeader>
-                <div className='grid gap-4 py-4'>
-                    <div className='grid grid-cols-4 items-center gap-4'>
+                <div className='flex gap-4 py-4 mb-0.5'>
+                    <div className='items-center gap-4 w-3/4 mx-auto'>
                         <Input
-                            className='col-span-3'
-                            placeholder='Add'
+                            onFocus={fetchTodo}
+                            className='w-full overflow placeholder:font-normal'
+                            placeholder={randomTodo && randomTodo.todo}
+                            onChange={e => setInputValue(e.target.value)}
+                value={inputValue}
                         />
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button type='submit'>Add</Button>
+                    <Button variant="special" className="w-3/4 mx-auto mb-4" onClick={addToDatabase}>Add</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
