@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
@@ -12,13 +12,11 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { getRandomTodo, addNewDocument } from '@/lib/handleTodos';
+import { getRandomTodo, addNewTodo } from '@/lib/handleTodos';
 import { useState, useEffect } from 'react';
 
-
 export const AddInput = () => {
-
-    const [randomTodo, setRandomTodo] = useState([])
+    const [randomTodo, setRandomTodo] = useState([]);
     const [inputValue, setInputValue] = useState('');
 
     const fetchTodo = async () => {
@@ -27,13 +25,12 @@ export const AddInput = () => {
     };
 
     useEffect(() => {
-        fetchTodo()
+        fetchTodo();
     }, []);
 
     const addToDatabase = async () => {
         try {
-            await addNewDocument(inputValue);
-            console.log(inputValue)
+            await addNewTodo(inputValue);
             setInputValue('');
         } catch (error) {
             console.error('Error adding document: ', error);
@@ -51,7 +48,7 @@ export const AddInput = () => {
                 </Button>
             </DialogTrigger>
             <DialogContent className='sm:max-w-[425px]'>
-                <DialogHeader className="items-center my-4">
+                <DialogHeader className='items-center my-4'>
                     <DialogTitle>
                         What do you need to get done today?
                     </DialogTitle>
@@ -62,13 +59,18 @@ export const AddInput = () => {
                             onFocus={fetchTodo}
                             className='w-full overflow placeholder:font-normal'
                             placeholder={randomTodo && randomTodo.todo}
-                            onChange={e => setInputValue(e.target.value)}
-                value={inputValue}
+                            onChange={(e) => setInputValue(e.target.value)}
+                            value={inputValue}
                         />
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button variant="special" className="w-3/4 mx-auto mb-4" onClick={addToDatabase}>Add</Button>
+                    <Button
+                        variant='special'
+                        className='w-3/4 mx-auto mb-4'
+                        onClick={addToDatabase}>
+                        Add
+                    </Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

@@ -12,7 +12,7 @@ import {
 import { getAllTodos } from '@/lib/handleTodos';
 import { useState, useEffect, Fragment } from 'react';
 
-import { CircleDashed } from 'lucide-react';
+import TodoItem from './todo-item';
 
 const Todos = () => {
     const [todos, setTodos] = useState([]);
@@ -24,13 +24,35 @@ const Todos = () => {
         };
 
         fetchTodos();
-    }, []);
+    }, [todos]);
+
+    // Filtering todos
+    const filteredByUncompletedStatus = todos.filter((todo) => !todo.completed);
 
     const toggleCompleted = (id) => {
-        todos.map((todo) =>
+        const updatedStatus = todos.map((todo) =>
             todo.id === id ? { ...todo, completed: !todo.completed } : todo
         );
+        setTodos(updatedStatus);
     };
+
+    /*
+    The numbers `1`, `-1`, and `0` in the sort function are used to determine the order of the elements in the array.
+
+    - If the function returns a value less than 0 (in this case `-1`), `a` is sorted to an index lower than `b` (i.e., `a` comes first).
+    - If the function returns a value greater than 0 (in this case `1`), `a` is sorted to an index higher than `b` (i.e., `b` comes first).
+    - If the function returns 0, `a` and `b` remain unchanged with respect to each other, but sorted with respect to all different elements.
+     */
+
+    const orderedTodos = [...todos].sort((a, b) => {
+        if (a.completed && !b.completed) {
+            return 1;
+        } else if (!a.completed && b.completed) {
+            return -1;
+        } else {
+            return 0;
+        }
+    });
 
     return (
         <Table>
@@ -38,35 +60,26 @@ const Todos = () => {
                 <TableRow>
                     <TableHead className='w-[500px]'>
                         My todos{' '}
-                        <span className='ml-2 bg-muted/60 p-1 rounded-md text-xs'>
-                            {todos && todos.length} things to do
-                        </span>
+                        {todos && filteredByUncompletedStatus.length > 0 && (
+                            <span className='ml-2 bg-muted/60 p-1 rounded-md text-xs'>
+                                {filteredByUncompletedStatus.length}{' '}
+                                {filteredByUncompletedStatus.length === 1
+                                    ? 'thing'
+                                    : 'things'}{' '}
+                                to do
+                            </span>
+                        )}
                     </TableHead>
                     <TableHead className='text-right'>Status</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {todos.map((todo) => (
+                {orderedTodos.map((todo) => (
                     <Fragment key={todo.id}>
-                    <TableRow>
-                        <TableCell
-                            className='font-medium flex items-top gap-5'>
-                            <span>
-                                <input
-                                    type='checkbox'
-                                    checked={todo.completed}
-                                    className='size-4 hover:text-white cursor-pointer'
-                                    onChange={() => toggleCompleted(todo.id)}
-                                />
-                            </span>
-                            {todo.todo}
-                        </TableCell>
-                        <TableCell
-                            key={todo.completed}
-                            className='text-right text-muted-foreground'>
-                            {todo.completed ? 'Completed' : 'Not Completed'}
-                        </TableCell>
-                    </TableRow>
+                        <TodoItem
+                            todo={todo}
+                            toggleCompleted={toggleCompleted}
+                        />
                     </Fragment>
                 ))}
             </TableBody>
