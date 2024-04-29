@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/table';
 
 import { useEffect, Fragment } from 'react';
-
 import TodoItem from './todo-item';
 
 const Todos = ({ todos, reloadTodos, fetchTodos, toggleCompleted }) => {
@@ -19,17 +18,10 @@ const Todos = ({ todos, reloadTodos, fetchTodos, toggleCompleted }) => {
         fetchTodos();
     }, [reloadTodos]);
 
-    // Filtering todos
+    // FILTER TODOS BY STATUS
     const filteredByUncompletedStatus = todos.filter((todo) => !todo.completed);
 
-    /*
-    The numbers `1`, `-1`, and `0` in the sort function are used to determine the order of the elements in the array.
-
-    - If the function returns a value less than 0 (in this case `-1`), `a` is sorted to an index lower than `b` (i.e., `a` comes first).
-    - If the function returns a value greater than 0 (in this case `1`), `a` is sorted to an index higher than `b` (i.e., `b` comes first).
-    - If the function returns 0, `a` and `b` remain unchanged with respect to each other, but sorted with respect to all different elements.
-     */
-
+    // ORDER TODOS BY STATUS
     const orderedTodos = [...todos].sort((a, b) => {
         if (a.completed && !b.completed) {
             return 1;

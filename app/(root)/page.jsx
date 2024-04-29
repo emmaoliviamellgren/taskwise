@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { Input } from '@/components/ui/input.jsx';
 import { ModeToggle } from '@/components/mode-toggle.jsx';
 import AddInput from '@/components/ui/add-input.jsx';
-import { addNewTodo, getAllTodos, getRandomTodo } from '@/lib/handleTodos.js';
+import { addNewTodo, getAllTodos, getRandomTodo, updateTodoStatus } from '@/lib/handleTodos.js';
 
 const Page = () => {
     const [todos, setTodos] = useState([]);
@@ -15,23 +15,28 @@ const Page = () => {
     const [inputValue, setInputValue] = useState('');
     const [randomTodo, setRandomTodo] = useState([]);
 
+    // FETCH RANDOM TODOS FOR INSPIRATION IN INPUT BOX
     const fetchRandomTodo = async () => {
         const fetchedTodo = await getRandomTodo();
         setRandomTodo(fetchedTodo);
     };
 
+    // FETCH ALL TODOS
     const fetchTodos = async () => {
         const fetchedTodos = await getAllTodos();
         setTodos(fetchedTodos);
     };
 
-    const toggleCompleted = (id) => {
+    // TOGGLE A TODO AS COMPLETED
+    const toggleCompleted = async (id) => {
         const updatedStatus = todos.map((todo) =>
             todo.id === id ? { ...todo, completed: !todo.completed } : todo
         );
+        await updateTodoStatus(id)
         setTodos(updatedStatus);
     };
 
+    // ADD A NEW TODO
     const addToDatabase = async () => {
         try {
             await addNewTodo(inputValue);
