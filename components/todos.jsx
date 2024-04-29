@@ -9,32 +9,18 @@ import {
     TableRow,
 } from '@/components/ui/table';
 
-import { getAllTodos } from '@/lib/handleTodos';
-import { useState, useEffect, Fragment } from 'react';
+import { useEffect, Fragment } from 'react';
 
 import TodoItem from './todo-item';
 
-const Todos = () => {
-    const [todos, setTodos] = useState([]);
-
+const Todos = ({ todos, reloadTodos, fetchTodos, toggleCompleted }) => {
+    
     useEffect(() => {
-        const fetchTodos = async () => {
-            const fetchedTodos = await getAllTodos();
-            setTodos(fetchedTodos);
-        };
-
         fetchTodos();
-    }, [todos]);
+    }, [reloadTodos]);
 
     // Filtering todos
     const filteredByUncompletedStatus = todos.filter((todo) => !todo.completed);
-
-    const toggleCompleted = (id) => {
-        const updatedStatus = todos.map((todo) =>
-            todo.id === id ? { ...todo, completed: !todo.completed } : todo
-        );
-        setTodos(updatedStatus);
-    };
 
     /*
     The numbers `1`, `-1`, and `0` in the sort function are used to determine the order of the elements in the array.
@@ -79,6 +65,7 @@ const Todos = () => {
                         <TodoItem
                             todo={todo}
                             toggleCompleted={toggleCompleted}
+                            fetchTodos={fetchTodos}
                         />
                     </Fragment>
                 ))}

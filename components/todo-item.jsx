@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { OptionsToggle } from './options-toggle';
 
 
-const TodoItem = ({ todo, toggleCompleted }) => {
+const TodoItem = ({ todo, toggleCompleted, fetchTodos }) => {
 
     return (
         <TableRow>
@@ -44,7 +44,7 @@ const TodoItem = ({ todo, toggleCompleted }) => {
             <TableCell
                 key={todo.completed}
                 className='text-right text-muted-foreground'>
-                <OptionsToggle todo={todo} />
+                <OptionsToggle todo={todo} fetchTodos={fetchTodos} />
             </TableCell>
         </TableRow>
     );

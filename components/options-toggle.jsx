@@ -11,7 +11,7 @@ import {
 import { deleteTodo } from '@/lib/handleTodos';
 import { EllipsisVertical } from 'lucide-react';
 
-export const OptionsToggle = ({ todo }) => {
+export const OptionsToggle = ({ todo, fetchTodos }) => {
 
     return (
         <DropdownMenu>
@@ -28,7 +28,9 @@ export const OptionsToggle = ({ todo }) => {
                 <DropdownMenuItem>Edit</DropdownMenuItem>
                 <DropdownMenuItem
                     className='text-red-800 hover:text-red-700'
-                    onClick={() => deleteTodo(todo.id)}>
+                    onClick={() => {
+                        deleteTodo(todo.id);
+                        fetchTodos()}}>
                     Delete
                 </DropdownMenuItem>
             </DropdownMenuContent>

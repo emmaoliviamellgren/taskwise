@@ -6,37 +6,21 @@ import { Plus } from 'lucide-react';
 import {
     Dialog,
     DialogContent,
+    DialogClose,
     DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { getRandomTodo, addNewTodo } from '@/lib/handleTodos';
-import { useState, useEffect } from 'react';
 
-export const AddInput = () => {
-    const [randomTodo, setRandomTodo] = useState([]);
-    const [inputValue, setInputValue] = useState('');
-
-    const fetchTodo = async () => {
-        const fetchedTodo = await getRandomTodo();
-        setRandomTodo(fetchedTodo);
-    };
-
-    useEffect(() => {
-        fetchTodo();
-    }, []);
-
-    const addToDatabase = async () => {
-        try {
-            await addNewTodo(inputValue);
-            setInputValue('');
-        } catch (error) {
-            console.error('Error adding document: ', error);
-        }
-    };
-
+export const AddInput = ({
+    addToDatabase,
+    setInputValue,
+    inputValue,
+    fetchRandomTodo,
+    randomTodo,
+}) => {
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -56,7 +40,7 @@ export const AddInput = () => {
                 <div className='flex gap-4 py-4 mb-0.5'>
                     <div className='items-center gap-4 w-3/4 mx-auto'>
                         <Input
-                            onFocus={fetchTodo}
+                            onFocus={fetchRandomTodo}
                             className='w-full overflow placeholder:font-normal'
                             placeholder={randomTodo && randomTodo.todo}
                             onChange={(e) => setInputValue(e.target.value)}
@@ -65,12 +49,16 @@ export const AddInput = () => {
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button
-                        variant='special'
-                        className='w-3/4 mx-auto mb-4'
-                        onClick={addToDatabase}>
-                        Add
-                    </Button>
+                    <DialogClose
+                        asChild
+                        className='w-full'>
+                        <Button
+                            variant='special'
+                            className='w-3/4 mx-auto mb-4'
+                            onClick={addToDatabase}>
+                            Add
+                        </Button>
+                    </DialogClose>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
