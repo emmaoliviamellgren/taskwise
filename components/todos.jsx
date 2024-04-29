@@ -12,7 +12,7 @@ import {
 import { useEffect, Fragment } from 'react';
 import TodoItem from './todo-item';
 
-const Todos = ({ todos, reloadTodos, fetchTodos, toggleCompleted }) => {
+const Todos = ({ todos, reloadTodos, fetchTodos, toggleCompleted, invalidInput }) => {
     
     useEffect(() => {
         fetchTodos();
@@ -58,6 +58,7 @@ const Todos = ({ todos, reloadTodos, fetchTodos, toggleCompleted }) => {
                             todo={todo}
                             toggleCompleted={toggleCompleted}
                             fetchTodos={fetchTodos}
+                            invalidInput={invalidInput}
                         />
                     </Fragment>
                 ))}

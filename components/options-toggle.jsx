@@ -24,12 +24,13 @@ import { deleteTodo, updateTodoText } from '@/lib/handleTodos';
 import { EllipsisVertical } from 'lucide-react';
 import { useState } from 'react';
 
-export const OptionsToggle = ({ todo, fetchTodos }) => {
+export const OptionsToggle = ({ todo, fetchTodos, invalidInput }) => {
 
     const [newValue, setNewValue] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <Dialog>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenu>
                 <DropdownMenuTrigger
                     asChild
@@ -40,10 +41,10 @@ export const OptionsToggle = ({ todo, fetchTodos }) => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                     <DialogTrigger asChild>
-                        <DropdownMenuItem>Edit</DropdownMenuItem>
+                        <DropdownMenuItem className="cursor-pointer">Edit</DropdownMenuItem>
                     </DialogTrigger>
                     <DropdownMenuItem
-                        className='text-red-800 hover:text-red-700'
+                        className='text-red-800 hover:text-red-700 cursor-pointer'
                         onClick={() => {
                             deleteTodo(todo.id);
                             fetchTodos();
@@ -52,8 +53,8 @@ export const OptionsToggle = ({ todo, fetchTodos }) => {
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
-            <DialogContent>
-                <DialogHeader>
+            <DialogContent className='sm:max-w-[425px]'>
+                <DialogHeader className='items-center my-4'>
                     <DialogTitle>Edit todo</DialogTitle>
                 </DialogHeader>
                 <div className='flex gap-4 py-4 mb-0.5'>
@@ -65,19 +66,21 @@ export const OptionsToggle = ({ todo, fetchTodos }) => {
                     </div>
                 </div>
                 <DialogFooter>
-                <DialogClose
-                        asChild
-                        className='w-full'>
                         <Button
                             variant='special'
                             className='w-3/4 mx-auto mb-4'
                             onClick={() => {
+                                if(newValue.trim() == '') {
+                                    invalidInput()
+                                    return
+                                }
+                                setIsOpen(false);
                                 updateTodoText(newValue, todo.id);
                                 fetchTodos();
                                 }}>
                             Save changes
                         </Button>
-                    </DialogClose>
+
                 </DialogFooter>
             </DialogContent>
         </Dialog>

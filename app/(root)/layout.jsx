@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/app/(root)/(providers)/theme-provider";
+import TodoContextProvider from "./(providers)/TodoContext";
 
 import "../globals.css";
 
@@ -20,7 +21,9 @@ export default function RootLayout({ children }) {
               enableSystem
               disableTransitionOnChange
             >
+              <TodoContextProvider>
             {children}
+            </TodoContextProvider>
           </ThemeProvider>
       </body>
   </html>

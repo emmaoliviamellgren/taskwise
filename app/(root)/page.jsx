@@ -2,18 +2,29 @@
 
 import Todos from '../../components/todos.jsx';
 import { Search } from 'lucide-react';
+import { useAnimate, stagger } from "framer-motion"
 import { useState } from 'react';
 
 import { Input } from '@/components/ui/input.jsx';
 import { ModeToggle } from '@/components/mode-toggle.jsx';
 import AddInput from '@/components/ui/add-input.jsx';
-import { addNewTodo, getAllTodos, getRandomTodo, updateTodoStatus } from '@/lib/handleTodos.js';
+import {
+    addNewTodo,
+    getAllTodos,
+    getRandomTodo,
+    updateTodoStatus,
+} from '@/lib/handleTodos.js';
 
 const Page = () => {
     const [todos, setTodos] = useState([]);
     const [reloadTodos, setReloadTodos] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [randomTodo, setRandomTodo] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const invalidInput = () => {
+        console.log('Invalid input')
+    }
 
     // FETCH RANDOM TODOS FOR INSPIRATION IN INPUT BOX
     const fetchRandomTodo = async () => {
@@ -32,7 +43,7 @@ const Page = () => {
         const updatedStatus = todos.map((todo) =>
             todo.id === id ? { ...todo, completed: !todo.completed } : todo
         );
-        await updateTodoStatus(id)
+        await updateTodoStatus(id);
         setTodos(updatedStatus);
     };
 
@@ -60,6 +71,7 @@ const Page = () => {
                         inputValue={inputValue}
                         fetchRandomTodo={fetchRandomTodo}
                         randomTodo={randomTodo}
+                        invalidInput={invalidInput}
                     />
                 </div>
                 <div className='w-[400px] mb-12'>
@@ -74,6 +86,7 @@ const Page = () => {
                         todos={todos}
                         reloadTodos={reloadTodos}
                         fetchTodos={fetchTodos}
+                        invalidInput={invalidInput}
                         toggleCompleted={toggleCompleted}
                     />
                 </div>

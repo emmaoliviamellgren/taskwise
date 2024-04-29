@@ -13,6 +13,7 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { useState } from 'react';
 
 export const AddInput = ({
     addToDatabase,
@@ -20,9 +21,13 @@ export const AddInput = ({
     inputValue,
     fetchRandomTodo,
     randomTodo,
+    invalidInput
 }) => {
+
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
-        <Dialog>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
                 <Button
                     variant='dashed'
@@ -49,16 +54,19 @@ export const AddInput = ({
                     </div>
                 </div>
                 <DialogFooter>
-                    <DialogClose
-                        asChild
-                        className='w-full'>
                         <Button
                             variant='special'
                             className='w-3/4 mx-auto mb-4'
-                            onClick={addToDatabase}>
+                            onClick={() => {
+                                if(inputValue.trim() == '') {
+                                    invalidInput()
+                                    return
+                                }
+                                setIsOpen(false);
+                                addToDatabase();
+                                }}>
                             Add
                         </Button>
-                    </DialogClose>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

@@ -1,15 +1,10 @@
-import {
-    TableCell,
-    TableRow,
-} from '@/components/ui/table';
+import { TableCell, TableRow } from '@/components/ui/table';
 
 import { CircleDashed, CircleCheckBig } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { OptionsToggle } from './options-toggle';
 
-
-const TodoItem = ({ todo, toggleCompleted, fetchTodos }) => {
-
+const TodoItem = ({ todo, toggleCompleted, fetchTodos, invalidInput }) => {
     return (
         <TableRow>
             <TableCell>
@@ -44,7 +39,11 @@ const TodoItem = ({ todo, toggleCompleted, fetchTodos }) => {
             <TableCell
                 key={todo.completed}
                 className='text-right text-muted-foreground'>
-                <OptionsToggle todo={todo} fetchTodos={fetchTodos} />
+                <OptionsToggle
+                    todo={todo}
+                    fetchTodos={fetchTodos}
+                    invalidInput={invalidInput}
+                />
             </TableCell>
         </TableRow>
     );
