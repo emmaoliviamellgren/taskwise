@@ -16,6 +16,7 @@ export default function RootLayout({ children }) {
         <html
             lang='en'
             suppressHydrationWarning>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
             <body className={inter.className}>
                 <TodoContextProvider>
                     <ThemeProvider
