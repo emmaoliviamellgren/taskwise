@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
                     content='width=device-width, initial-scale=1, maximum-scale=1'
                 />
             </Head>
-            <body className={inter.className}>
+            <body className={`${inter.className} flex flex-col h-screen overflow-auto`}>
                 <TodoContextProvider>
                     <ThemeProvider
                         attribute='class'
