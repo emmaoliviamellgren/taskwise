@@ -1,9 +1,6 @@
 'use client';
 
 import Todos from '../../components/todos.jsx';
-import { Search } from 'lucide-react';
-
-import { Input } from '@/components/ui/input.jsx';
 import { ModeToggle } from '@/components/mode-toggle.jsx';
 import AddInput from '@/components/add-input.jsx';
 

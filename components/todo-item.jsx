@@ -9,7 +9,7 @@ const TodoItem = ({ todo }) => {
     const { toggleCompleted } = useTodoContext();
 
     return (
-        <TableRow>
+        <TableRow> 
             <TableCell>
                 <AnimatePresence>
                     <motion.span
@@ -44,8 +44,6 @@ const TodoItem = ({ todo }) => {
                 className='text-right text-muted-foreground'>
                 <OptionsToggle
                     todo={todo}
-                    // fetchTodos={fetchTodos}
-                    // invalidInput={invalidInput}
                 />
             </TableCell>
         </TableRow>
