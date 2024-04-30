@@ -67,6 +67,14 @@ export const AddInput = () => {
                         }}>
                         Add
                     </Button>
+                    <Button
+                        variant='outline'
+                        className='w-3/4 mx-auto mb-4 sm:hidden text-muted-foreground'
+                        onClick={() => {
+                            setIsOpen(false);
+                        }}>
+                        Cancel
+                    </Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

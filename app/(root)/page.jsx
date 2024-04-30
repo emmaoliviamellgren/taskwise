@@ -10,12 +10,12 @@ import AddInput from '@/components/add-input.jsx';
 const Page = () => {
 
     return (
-        <div className='w-screen min-h-screen'>
+        <div className='w-screen min-h-screen overflow-x-hidden'>
             <div className='pr-4 pt-4 flex justify-end mb-32'>
                 <ModeToggle />
             </div>
             <main className='flex flex-col justify-center items-center gap-12'>
-                <div className='w-[450px] md:w-[550px]'>
+                <div className='w-[350px] md:w-[550px]'>
                     <AddInput />
                 </div>
                 <div>
