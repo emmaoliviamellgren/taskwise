@@ -11,19 +11,12 @@ const Page = () => {
 
     return (
         <div className='w-screen min-h-screen'>
-            <div className='pr-4 pt-4 flex justify-end'>
+            <div className='pr-4 pt-4 flex justify-end mb-32'>
                 <ModeToggle />
             </div>
-            <main className='flex flex-col justify-center items-center gap-2'>
-                <div className='w-[400px]'>
+            <main className='flex flex-col justify-center items-center gap-12'>
+                <div className='w-[450px] md:w-[550px]'>
                     <AddInput />
-                </div>
-                <div className='w-[400px] mb-12'>
-                    <Search className='relative top-[30px] left-2 text-muted-foreground/90 size-5' />
-                    <Input
-                        className='pl-9 pr-3'
-                        placeholder='Search'
-                    />
                 </div>
                 <div>
                     <Todos />

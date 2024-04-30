@@ -54,7 +54,6 @@ const Todos = () => {
                             </span>
                         )}
                     </TableHead>
-                    <TableHead className='text-right'>Status</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>

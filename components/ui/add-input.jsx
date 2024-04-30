@@ -34,7 +34,7 @@ export const AddInput = () => {
             <DialogTrigger asChild>
                 <Button
                     variant='dashed'
-                    className='w-full h-[70px]'>
+                    className='w-full h-[50px]'>
                     <Plus className='size-4 mr-2' />
                     Add New
                 </Button>
