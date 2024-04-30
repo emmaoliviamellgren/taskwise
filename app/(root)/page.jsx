@@ -22,6 +22,8 @@ const Page = () => {
                     <Todos />
                 </div>
             </main>
+            <footer className='h-24'>
+            </footer>
         </div>
     );
 };
