@@ -26,7 +26,7 @@ import { useState } from 'react';
 import { useTodoContext } from '@/app/(root)/(providers)/TodoContext';
 
 export const OptionsToggle = ({ todo }) => {
-    const { invalidInput, fetchTodos } = useTodoContext();
+    const { fetchTodos } = useTodoContext();
 
     const [newValue, setNewValue] = useState('');
     const [isOpen, setIsOpen] = useState(false);
@@ -73,13 +73,10 @@ export const OptionsToggle = ({ todo }) => {
                 </div>
                 <DialogFooter>
                     <Button
+                    disabled={newValue.trim() == ''}
                         variant='special'
-                        className='w-3/4 mx-auto mb-4'
+                        className='w-3/4 mx-auto mb-4 disabled:cursor-not-allowed'
                         onClick={() => {
-                            if (newValue.trim() == '') {
-                                invalidInput();
-                                return;
-                            }
                             setIsOpen(false);
                             updateTodoText(newValue, todo.id);
                             fetchTodos();

@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
+import { Plus, CircleAlert } from 'lucide-react';
 
 import {
     Dialog,
@@ -22,8 +22,7 @@ export const AddInput = () => {
         randomTodo,
         inputValue,
         setInputValue,
-        invalidInput,
-        addToDatabase
+        addToDatabase,
     } = useTodoContext();
 
     const [isOpen, setIsOpen] = useState(false);
@@ -59,13 +58,10 @@ export const AddInput = () => {
                 </div>
                 <DialogFooter>
                     <Button
+                        disabled={inputValue.trim() == ''}
                         variant='special'
-                        className='w-3/4 mx-auto mb-4'
+                        className='w-3/4 mx-auto mb-4 disabled:cursor-not-allowed'
                         onClick={() => {
-                            if (inputValue.trim() == '') {
-                                invalidInput();
-                                return;
-                            }
                             setIsOpen(false);
                             addToDatabase();
                         }}>

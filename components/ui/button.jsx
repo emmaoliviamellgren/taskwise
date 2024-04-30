@@ -5,7 +5,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-    'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50',
+    'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none disabled:opacity-30 disabled:cursor-not-allowed',
     {
         variants: {
             variant: {
@@ -17,7 +17,7 @@ const buttonVariants = cva(
                     'border border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
                 dashed:
                     'outline-dashed outline-2 outline-slate-700 bg-secondary/50 hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-                special: 'sm:flex items-center w-72 text-left space-x-3 px-4 h-12 ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 rounded-lg text-slate-400 bg-slate-800 ring-0 text-slate-300 shadow-lg shadow-slate-600/50 border border-slate-500/50 hover:bg-slate-700 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+                special: 'sm:flex items-center w-72 text-left space-x-3 px-4 h-12 ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 rounded-lg text-slate-400 bg-slate-800 ring-0 text-slate-300 shadow-lg shadow-slate-600/50 border border-slate-500/50 hover:bg-slate-700 disabled:hover:bg-slate-800 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
                 secondary:
                     'bg-secondary text-secondary-foreground hover:bg-secondary/80',
                 ghost: 'hover:bg-accent hover:text-accent-foreground active:bg-accent',
