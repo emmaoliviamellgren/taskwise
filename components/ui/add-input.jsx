@@ -14,20 +14,24 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
+import { useTodoContext } from '@/app/(root)/(providers)/TodoContext';
 
-export const AddInput = ({
-    addToDatabase,
-    setInputValue,
-    inputValue,
-    fetchRandomTodo,
-    randomTodo,
-    invalidInput
-}) => {
+export const AddInput = () => {
+    const {
+        fetchRandomTodo,
+        randomTodo,
+        inputValue,
+        setInputValue,
+        invalidInput,
+        addToDatabase
+    } = useTodoContext();
 
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog
+            open={isOpen}
+            onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
                 <Button
                     variant='dashed'
@@ -54,19 +58,19 @@ export const AddInput = ({
                     </div>
                 </div>
                 <DialogFooter>
-                        <Button
-                            variant='special'
-                            className='w-3/4 mx-auto mb-4'
-                            onClick={() => {
-                                if(inputValue.trim() == '') {
-                                    invalidInput()
-                                    return
-                                }
-                                setIsOpen(false);
-                                addToDatabase();
-                                }}>
-                            Add
-                        </Button>
+                    <Button
+                        variant='special'
+                        className='w-3/4 mx-auto mb-4'
+                        onClick={() => {
+                            if (inputValue.trim() == '') {
+                                invalidInput();
+                                return;
+                            }
+                            setIsOpen(false);
+                            addToDatabase();
+                        }}>
+                        Add
+                    </Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

@@ -3,7 +3,6 @@
 import {
     Table,
     TableBody,
-    TableCell,
     TableHead,
     TableHeader,
     TableRow,
@@ -11,9 +10,14 @@ import {
 
 import { useEffect, Fragment } from 'react';
 import TodoItem from './todo-item';
+import {
+    useTodoContext,
+    fetchTodos,
+} from '@/app/(root)/(providers)/TodoContext';
 
-const Todos = ({ todos, reloadTodos, fetchTodos, toggleCompleted, invalidInput }) => {
-    
+const Todos = () => {
+    const { reloadTodos, todos, fetchTodos } = useTodoContext();
+
     useEffect(() => {
         fetchTodos();
     }, [reloadTodos]);
@@ -21,14 +25,16 @@ const Todos = ({ todos, reloadTodos, fetchTodos, toggleCompleted, invalidInput }
     // FILTER TODOS BY STATUS
     const filteredByUncompletedStatus = todos.filter((todo) => !todo.completed);
 
-    // ORDER TODOS BY STATUS
+
+    // ORDER TODOS BY STATUS AND CREATION TIME
     const orderedTodos = [...todos].sort((a, b) => {
         if (a.completed && !b.completed) {
             return 1;
         } else if (!a.completed && b.completed) {
             return -1;
         } else {
-            return 0;
+            // If both todos have the same completion status, sort by creation time
+            return b.createdAt - a.createdAt;
         }
     });
 
@@ -56,9 +62,6 @@ const Todos = ({ todos, reloadTodos, fetchTodos, toggleCompleted, invalidInput }
                     <Fragment key={todo.id}>
                         <TodoItem
                             todo={todo}
-                            toggleCompleted={toggleCompleted}
-                            fetchTodos={fetchTodos}
-                            invalidInput={invalidInput}
                         />
                     </Fragment>
                 ))}
