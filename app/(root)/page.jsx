@@ -11,7 +11,7 @@ const Page = () => {
 
     return (
         <div className='w-screen min-h-screen overflow-x-hidden'>
-            <div className='pr-4 pt-4 flex justify-end mb-32'>
+            <div className='pr-4 pt-4 flex justify-end mb-12'>
                 <ModeToggle />
             </div>
             <main className='flex flex-col justify-center items-center gap-12'>
