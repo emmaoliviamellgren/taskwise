@@ -5,7 +5,7 @@ import { Search } from 'lucide-react';
 
 import { Input } from '@/components/ui/input.jsx';
 import { ModeToggle } from '@/components/mode-toggle.jsx';
-import AddInput from '@/components/ui/add-input.jsx';
+import AddInput from '@/components/add-input.jsx';
 
 const Page = () => {
 

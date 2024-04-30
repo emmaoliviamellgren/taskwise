@@ -2,12 +2,12 @@ import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBx9Q806wrxKL5nHq-yVbztoi-LQFEid24",
-    authDomain: "todo-with-next-f3121.firebaseapp.com",
-    projectId: "todo-with-next-f3121",
-    storageBucket: "todo-with-next-f3121.appspot.com",
-    messagingSenderId: "243937507467",
-    appId: "1:243937507467:web:b728a5b8e09f54880e3c8e",
+    apiKey: process.env.NEXT_PUBLIC_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+    storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_PUBLIC_APP_ID,
 };
 
 // Singleton: If there is an app already created, get app. Else, establish a new connection to firebase (Initialize Firebase). Prevents multiple connections.
