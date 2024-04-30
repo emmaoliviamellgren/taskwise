@@ -33,7 +33,6 @@ const Todos = () => {
         } else if (!a.completed && b.completed) {
             return -1;
         } else {
-            // If both todos have the same completion status, sort by creation time
             return b.createdAt - a.createdAt;
         }
     });
@@ -54,6 +53,7 @@ const Todos = () => {
                             </span>
                         )}
                     </TableHead>
+                    <TableHead></TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
