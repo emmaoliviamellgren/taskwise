@@ -1,3 +1,4 @@
+import { ClerkProvider } from '@clerk/nextjs';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/app/(root)/(providers)/theme-provider';
 import TodoContextProvider from './(providers)/TodoContext';
@@ -14,26 +15,29 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
     return (
-        <html
-            lang='en'
-            suppressHydrationWarning>
-            <Head>
-                <meta
-                    name='viewport'
-                    content='width=device-width, initial-scale=1, maximum-scale=1'
-                />
-            </Head>
-            <body className={`${inter.className} flex flex-col h-screen overflow-auto`}>
-                <TodoContextProvider>
-                    <ThemeProvider
-                        attribute='class'
-                        defaultTheme='system'
-                        enableSystem
-                        disableTransitionOnChange>
-                        {children}
-                    </ThemeProvider>
-                </TodoContextProvider>
-            </body>
-        </html>
+        <ClerkProvider>
+            <html
+                lang='en'
+                suppressHydrationWarning>
+                <Head>
+                    <meta
+                        name='viewport'
+                        content='width=device-width, initial-scale=1, maximum-scale=1'
+                    />
+                </Head>
+                <body
+                    className={`${inter.className} flex flex-col h-screen overflow-auto`}>
+                    <TodoContextProvider>
+                        <ThemeProvider
+                            attribute='class'
+                            defaultTheme='system'
+                            enableSystem
+                            disableTransitionOnChange>
+                            {children}
+                        </ThemeProvider>
+                    </TodoContextProvider>
+                </body>
+            </html>
+        </ClerkProvider>
     );
 }
