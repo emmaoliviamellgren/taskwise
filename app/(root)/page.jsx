@@ -1,10 +1,9 @@
 import Todos from '../../components/todos.jsx';
 import { ModeToggle } from '@/components/mode-toggle.jsx';
 import AddInput from '@/components/add-input.jsx';
-import User from './@protectedPages/_components/User.jsx';
+import User from '../(auth)/_components/User.jsx';
 
 const Page = () => {
-
     return (
         <div className='w-screen min-h-screen overflow-x-hidden'>
             <div className='px-4 pt-4 flex justify-between items-center mb-12'>
@@ -15,8 +14,8 @@ const Page = () => {
                 <div className='w-[350px] md:w-[550px]'>
                     <AddInput />
                 </div>
-                <div className="mb-12">
-                    <Todos/>
+                <div className='mb-12'>
+                    <Todos />
                 </div>
             </main>
         </div>

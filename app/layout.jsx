@@ -1,10 +1,10 @@
 import { ClerkProvider } from '@clerk/nextjs';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/app/(root)/(providers)/theme-provider';
-import TodoContextProvider from './(providers)/TodoContext';
+import TodoContextProvider from './(root)/(providers)/TodoContext';
 import Head from 'next/head';
 
-import '../globals.css';
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
