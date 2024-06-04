@@ -15,7 +15,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
     return (
-        // <ClerkProvider>
+        <ClerkProvider>
             <html
                 lang='en'
                 suppressHydrationWarning>
@@ -38,6 +38,6 @@ export default function RootLayout({ children }) {
                     </TodoContextProvider>
                 </body>
             </html>
-        // </ClerkProvider>
+        </ClerkProvider>
     );
 }
