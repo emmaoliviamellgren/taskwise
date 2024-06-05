@@ -1,4 +1,5 @@
 import { ClerkProvider } from '@clerk/nextjs';
+import { dark } from '@clerk/themes';
 import { ThemeProvider } from '@/app/(private)/(providers)/theme-provider';
 import TodoContextProvider from './(private)/(providers)/TodoContext';
 import Head from 'next/head';
@@ -12,7 +13,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
     return (
-        <ClerkProvider>
+        <ClerkProvider
+            appearance={{
+                baseTheme: dark,
+            }}>
             <html
                 lang='en'
                 suppressHydrationWarning>

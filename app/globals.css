@@ -10,6 +10,9 @@
 
 @layer base {
     :root {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+
         font-family: Inter, sans-serif;
         font-feature-settings: 'ss03' 1, 'cv02' 1, 'cv11' 1; /* fix for Chrome */
 
@@ -85,4 +88,29 @@
     body {
         @apply bg-background text-foreground;
     }
+}
+
+.cl-formButtonPrimary,
+.cl-button {
+    background: var(--background);
+    color: var(--primary-foreground);
+    font-weight: bold;
+}
+
+.cl-formButtonPrimary:hover, .cl-button:hover {
+    background: var(--background);
+    color: var(--primary-foreground);
+}
+
+.cl-footerActionLink {
+    color: rgb(148 163 184);
+    transition: all 0.3s ease-in-out;
+    font-weight: bolder;
+}
+
+.cl-footerActionLink:hover {
+    color: var(--primary-foreground);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+
 }
