@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
                 />
             </Head>
             <ClerkProvider>
-                <body className='flex flex-col h-screen overflow-auto'>
+                <body className='flex flex-col h-screen overflow-auto antialiased'>
                     <TodoContextProvider>
                         <ThemeProvider
                             attribute='class'

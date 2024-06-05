@@ -13,7 +13,7 @@ const TodoItem = ({ todo }) => {
             <TableCell>
                 <AnimatePresence>
                     <motion.span
-                        className='font-medium flex items-top gap-5'
+                        className='flex items-top gap-5'
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 20 }}
