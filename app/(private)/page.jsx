@@ -1,15 +1,11 @@
 import Todos from '../../components/todos.jsx';
-import { ModeToggle } from '@/components/mode-toggle.jsx';
 import AddInput from '@/components/add-input.jsx';
-import User from '../(auth)/_components/User.jsx';
+import Header from '@/components/header.jsx';
 
-const TodosPage = () => {
+const UserPage = () => {
     return (
         <div className='w-screen min-h-screen overflow-x-hidden'>
-            <div className='px-4 pt-4 flex justify-between items-center mb-12'>
-                <User />
-                <ModeToggle />
-            </div>
+            <Header />
             <main className='flex flex-col justify-center items-center gap-12'>
                 <div className='w-[350px] md:w-[550px]'>
                     <AddInput />
@@ -22,4 +18,4 @@ const TodosPage = () => {
     );
 };
 
-export default TodosPage;
+export default UserPage;

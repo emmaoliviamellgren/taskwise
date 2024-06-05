@@ -1,4 +1,9 @@
-import { ClerkProvider } from '@clerk/nextjs';
+import {
+    ClerkProvider,
+    RedirectToSignIn,
+    SignedIn,
+    SignedOut,
+} from '@clerk/nextjs';
 import { dark } from '@clerk/themes';
 import { ThemeProvider } from '@/app/(private)/(providers)/theme-provider';
 import TodoContextProvider from './(private)/(providers)/TodoContext';
@@ -13,19 +18,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
     return (
-        <ClerkProvider
-            appearance={{
-                baseTheme: dark,
-            }}>
-            <html
-                lang='en'
-                suppressHydrationWarning>
-                <Head>
-                    <meta
-                        name='viewport'
-                        content='width=device-width, initial-scale=1, maximum-scale=1'
-                    />
-                </Head>
+        <html
+            lang='en'
+            suppressHydrationWarning>
+            <Head>
+                <meta
+                    name='viewport'
+                    content='width=device-width, initial-scale=1, maximum-scale=1'
+                />
+            </Head>
+            <ClerkProvider
+                appearance={{
+                    baseTheme: dark,
+                }}>
                 <body className='flex flex-col h-screen overflow-auto'>
                     <TodoContextProvider>
                         <ThemeProvider
@@ -37,7 +42,7 @@ export default function RootLayout({ children }) {
                         </ThemeProvider>
                     </TodoContextProvider>
                 </body>
-            </html>
-        </ClerkProvider>
+            </ClerkProvider>
+        </html>
     );
 }
