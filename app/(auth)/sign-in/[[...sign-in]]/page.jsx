@@ -1,3 +1,4 @@
+import { ModeToggle } from '@/components/mode-toggle';
 import { SignIn } from '@clerk/nextjs';
 
 export default function SignInPage() {
@@ -12,17 +13,17 @@ export default function SignInPage() {
                         style={{
                             textShadow: '2px 2px 4px rgb(99 102 241 / 0.5)',
                         }}
-                        className='text-5xl text-primary-foreground font-bold tracking-tight'>
+                        className='text-5xl text-slate-100 font-bold tracking-tight'>
                         TaskWise
                     </h1>
-                    <h2 className='text-2xl text-primary-foreground font-medium tracking-tight'>
+                    <h2 className='text-2xl text-slate-100 font-medium tracking-tight'>
                         Start organizing your tasks today
                     </h2>
                     <p className='absolute bottom-6 text-sm font-medium text-slate-400'>
                         Built with ♥ by
                         <a
                             href='https://emmamellgren.vercel.app/'
-                            className='ml-1 transition-all duration-300 hover:text-primary-foreground focus-visible:text-primary'
+                            className='ml-1 transition-all duration-300 hover:text-slate-100 focus-visible:text-primary'
                             target='_blank'
                             rel='noreferrer noopener'>
                             Emma Mellgren

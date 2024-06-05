@@ -1,10 +1,4 @@
-import {
-    ClerkProvider,
-    RedirectToSignIn,
-    SignedIn,
-    SignedOut,
-} from '@clerk/nextjs';
-import { dark } from '@clerk/themes';
+import { ClerkProvider } from '@clerk/nextjs';
 import { ThemeProvider } from '@/app/(private)/(providers)/theme-provider';
 import TodoContextProvider from './(private)/(providers)/TodoContext';
 import Head from 'next/head';
@@ -27,10 +21,7 @@ export default function RootLayout({ children }) {
                     content='width=device-width, initial-scale=1, maximum-scale=1'
                 />
             </Head>
-            <ClerkProvider
-                appearance={{
-                    baseTheme: dark,
-                }}>
+            <ClerkProvider>
                 <body className='flex flex-col h-screen overflow-auto'>
                     <TodoContextProvider>
                         <ThemeProvider
