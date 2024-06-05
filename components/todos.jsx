@@ -13,7 +13,7 @@ import TodoItem from './todo-item';
 import {
     useTodoContext,
     fetchTodos,
-} from '@/app/(root)/(providers)/TodoContext';
+} from '@/app/(private)/(providers)/TodoContext';
 
 const Todos = () => {
     const { reloadTodos, todos, fetchTodos } = useTodoContext();
@@ -24,7 +24,6 @@ const Todos = () => {
 
     // FILTER TODOS BY STATUS
     const filteredByUncompletedStatus = todos.filter((todo) => !todo.completed);
-
 
     // ORDER TODOS BY STATUS AND CREATION TIME
     const orderedTodos = [...todos].sort((a, b) => {
@@ -59,9 +58,7 @@ const Todos = () => {
             <TableBody>
                 {orderedTodos.map((todo) => (
                     <Fragment key={todo.id}>
-                        <TodoItem
-                            todo={todo}
-                        />
+                        <TodoItem todo={todo} />
                     </Fragment>
                 ))}
             </TableBody>

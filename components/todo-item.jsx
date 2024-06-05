@@ -3,13 +3,13 @@ import { TableCell, TableRow } from '@/components/ui/table';
 import { CircleDashed, CircleCheckBig } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { OptionsToggle } from './options-toggle';
-import { useTodoContext } from '@/app/(root)/(providers)/TodoContext';
+import { useTodoContext } from '@/app/(private)/(providers)/TodoContext';
 
 const TodoItem = ({ todo }) => {
     const { toggleCompleted } = useTodoContext();
 
     return (
-        <TableRow> 
+        <TableRow>
             <TableCell>
                 <AnimatePresence>
                     <motion.span
@@ -42,9 +42,7 @@ const TodoItem = ({ todo }) => {
             <TableCell
                 key={todo.completed}
                 className='text-right text-muted-foreground'>
-                <OptionsToggle
-                    todo={todo}
-                />
+                <OptionsToggle todo={todo} />
             </TableCell>
         </TableRow>
     );

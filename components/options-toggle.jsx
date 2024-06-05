@@ -23,7 +23,7 @@ import { Input } from '@/components/ui/input';
 import { deleteTodo, updateTodoText } from '@/lib/handleTodos';
 import { EllipsisVertical } from 'lucide-react';
 import { useState } from 'react';
-import { useTodoContext } from '@/app/(root)/(providers)/TodoContext';
+import { useTodoContext } from '@/app/(private)/(providers)/TodoContext';
 
 export const OptionsToggle = ({ todo }) => {
     const { fetchTodos } = useTodoContext();
@@ -73,7 +73,7 @@ export const OptionsToggle = ({ todo }) => {
                 </div>
                 <DialogFooter>
                     <Button
-                    disabled={newValue.trim() == ''}
+                        disabled={newValue.trim() == ''}
                         variant='special'
                         className='w-3/4 mx-auto mb-4 disabled:cursor-not-allowed'
                         onClick={() => {

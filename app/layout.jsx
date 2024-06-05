@@ -1,12 +1,9 @@
 import { ClerkProvider } from '@clerk/nextjs';
-import { Inter } from 'next/font/google';
-import { ThemeProvider } from '@/app/(root)/(providers)/theme-provider';
-import TodoContextProvider from './(root)/(providers)/TodoContext';
+import { ThemeProvider } from '@/app/(private)/(providers)/theme-provider';
+import TodoContextProvider from './(private)/(providers)/TodoContext';
 import Head from 'next/head';
 
 import './globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
     title: 'TODO-APP',
@@ -25,8 +22,7 @@ export default function RootLayout({ children }) {
                         content='width=device-width, initial-scale=1, maximum-scale=1'
                     />
                 </Head>
-                <body
-                    className={`${inter.className} flex flex-col h-screen overflow-auto`}>
+                <body className='flex flex-col h-screen overflow-auto'>
                     <TodoContextProvider>
                         <ThemeProvider
                             attribute='class'

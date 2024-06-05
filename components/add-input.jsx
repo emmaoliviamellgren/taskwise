@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
-import { useTodoContext } from '@/app/(root)/(providers)/TodoContext';
+import { useTodoContext } from '@/app/(private)/(providers)/TodoContext';
 
 export const AddInput = () => {
     const {
