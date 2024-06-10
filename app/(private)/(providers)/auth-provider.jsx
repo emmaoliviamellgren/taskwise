@@ -6,12 +6,7 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
 
-    function redirectToSignIn(options) {
-        // Your implementation here
-        return new Promise((resolve, reject) => {
-            // Your code here
-        });
-    }
+
 
     return (
         <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

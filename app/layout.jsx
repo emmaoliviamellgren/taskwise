@@ -22,7 +22,8 @@ export default function RootLayout({ children }) {
                 />
             </Head>
             <ClerkProvider>
-                <body className='flex flex-col h-screen overflow-auto antialiased'>
+                <body className='flex flex-col h-screen overflow-auto antialiased'
+                suppressHydrationWarning>
                     <TodoContextProvider>
                         <ThemeProvider
                             attribute='class'

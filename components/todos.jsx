@@ -8,19 +8,12 @@ import {
     TableRow,
 } from '@/components/ui/table';
 
-import { useEffect, Fragment } from 'react';
+import { Fragment } from 'react';
 import TodoItem from './todo-item';
-import {
-    useTodoContext,
-    fetchTodos,
-} from '@/app/(private)/(providers)/TodoContext';
+import { useTodoContext } from '@/app/(private)/(providers)/TodoContext';
 
 const Todos = () => {
-    const { reloadTodos, todos, fetchTodos } = useTodoContext();
-
-    useEffect(() => {
-        fetchTodos();
-    }, [reloadTodos]);
+    const { todos } = useTodoContext();
 
     // FILTER TODOS BY STATUS
     const filteredByUncompletedStatus = todos.filter((todo) => !todo.completed);

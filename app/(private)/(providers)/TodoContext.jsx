@@ -3,10 +3,11 @@
 import {
     updateTodoStatus,
     getRandomTodo,
-    getAllTodos,
+    getTodosByUser,
     addNewTodo,
 } from '@/lib/handleTodos';
-import { createContext, useContext, useState } from 'react';
+import { useUser } from '@clerk/nextjs';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 export const TodoContext = createContext();
 
@@ -18,6 +19,20 @@ const TodoContextProvider = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [error, setError] = useState('');
 
+    const { user } = useUser();
+
+    // FETCH TODOS
+    const fetchTodosForUser = async () => {
+        const fetchedTodos = await getTodosByUser(user);
+        setTodos(fetchedTodos);
+    }
+
+    useEffect(() => {
+        if (user) {
+            fetchTodosForUser(user);
+        }
+    }, [user, reloadTodos]);
+
     const invalidInput = () => {
         setError('You must input a todo');
         console.log('Invalid input');
@@ -27,12 +42,6 @@ const TodoContextProvider = ({ children }) => {
     const fetchRandomTodo = async () => {
         const fetchedTodo = await getRandomTodo();
         setRandomTodo(fetchedTodo);
-    };
-
-    // FETCH ALL TODOS
-    const fetchTodos = async () => {
-        const fetchedTodos = await getAllTodos();
-        setTodos(fetchedTodos);
     };
 
     // TOGGLE A TODO AS COMPLETED
@@ -47,7 +56,7 @@ const TodoContextProvider = ({ children }) => {
     // ADD A NEW TODO
     const addToDatabase = async () => {
         try {
-            await addNewTodo(inputValue);
+            await addNewTodo(user, inputValue);
             setInputValue('');
             setReloadTodos((prev) => !prev);
         } catch (error) {
@@ -58,13 +67,13 @@ const TodoContextProvider = ({ children }) => {
     const value = {
         addToDatabase,
         toggleCompleted,
-        fetchTodos,
         fetchRandomTodo,
         invalidInput,
         todos,
         setTodos,
         reloadTodos,
         setReloadTodos,
+        fetchTodosForUser,
         inputValue,
         setInputValue,
         randomTodo,
