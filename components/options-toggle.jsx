@@ -20,16 +20,21 @@ import {
 
 import { Input } from '@/components/ui/input';
 
-import { deleteTodo, updateTodoText } from '@/lib/handleTodos';
+import { deleteTodo, updateTodo } from '@/lib/handleTodos';
 import { EllipsisVertical } from 'lucide-react';
 import { useState } from 'react';
 import { useTodoContext } from '@/app/(private)/(providers)/TodoContext';
+import { useUser } from '@clerk/nextjs';
 
 export const OptionsToggle = ({ todo }) => {
-    const { fetchTodos } = useTodoContext();
+    const { fetchTodosForUser } = useTodoContext();
+
+    const { user } = useUser();
 
     const [newValue, setNewValue] = useState('');
     const [isOpen, setIsOpen] = useState(false);
+
+    const updatedValue = { ...todo, todo: newValue };
 
     return (
         <Dialog
@@ -52,8 +57,8 @@ export const OptionsToggle = ({ todo }) => {
                     <DropdownMenuItem
                         className='text-red-800 hover:text-red-700 cursor-pointer'
                         onClick={() => {
-                            deleteTodo(todo.id);
-                            fetchTodos();
+                            deleteTodo(user, todo);
+                            fetchTodosForUser();
                         }}>
                         Delete
                     </DropdownMenuItem>
@@ -77,9 +82,8 @@ export const OptionsToggle = ({ todo }) => {
                         variant='special'
                         className='w-3/4 mx-auto mb-4 disabled:cursor-not-allowed'
                         onClick={() => {
+                            updateTodo(updatedValue, user);
                             setIsOpen(false);
-                            updateTodoText(newValue, todo.id);
-                            fetchTodos();
                         }}>
                         Save changes
                     </Button>

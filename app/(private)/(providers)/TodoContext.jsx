@@ -1,7 +1,7 @@
 'use client';
 
 import {
-    updateTodoStatus,
+    toggleCompleted,
     getRandomTodo,
     getTodosByUser,
     addNewTodo,
@@ -45,11 +45,11 @@ const TodoContextProvider = ({ children }) => {
     };
 
     // TOGGLE A TODO AS COMPLETED
-    const toggleCompleted = async (id) => {
+    const toggleCompletedLocally = async (todoId) => {
         const updatedStatus = todos.map((todo) =>
-            todo.id === id ? { ...todo, completed: !todo.completed } : todo
+            todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
         );
-        await updateTodoStatus(id);
+        await toggleCompleted(user, updatedStatus);
         setTodos(updatedStatus);
     };
 
@@ -66,7 +66,7 @@ const TodoContextProvider = ({ children }) => {
 
     const value = {
         addToDatabase,
-        toggleCompleted,
+        toggleCompletedLocally,
         fetchRandomTodo,
         invalidInput,
         todos,
