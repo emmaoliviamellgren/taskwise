@@ -28,6 +28,7 @@ const Todos = () => {
             return b.createdAt - a.createdAt;
         }
     });
+    console.log(todos, orderedTodos)
 
     return (
         <Table>
@@ -49,6 +50,13 @@ const Todos = () => {
                 </TableRow>
             </TableHeader>
             <TableBody>
+                {todos && todos.length === 0 && (
+                    <TableRow>
+                        <td className='text-center text-sm font-semibold text-muted-foreground py-6' colSpan='2'>
+                            No todos yet! Start by adding one above.
+                        </td>
+                    </TableRow>
+                )}
                 {orderedTodos.map((todo) => (
                     <Fragment key={todo.id}>
                         <TodoItem todo={todo} />

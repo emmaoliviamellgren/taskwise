@@ -20,7 +20,7 @@ import {
 
 import { Input } from '@/components/ui/input';
 
-import { deleteTodoinDB, updateTodoInDB } from '@/lib/handleTodos';
+import { deleteTodoInDB, updateTodoInDB } from '@/lib/handleTodos';
 import { EllipsisVertical } from 'lucide-react';
 import { useState } from 'react';
 import { useTodoContext } from '@/app/(private)/(providers)/TodoContext';
@@ -41,7 +41,7 @@ export const OptionsToggle = ({ todo }) => {
     };
 
     const deleteTodo = async () => {
-        await deleteTodoinDB(user, todo);
+        await deleteTodoInDB(user, todo);
         fetchTodosForUser();
     };
 

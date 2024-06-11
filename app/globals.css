@@ -96,3 +96,7 @@
     transition: all 0.3s ease-in-out;
     text-decoration: none;
 }
+
+.cl-userButtonBox, .cl-userButtonOuterIdentifier {
+    color: hsl(var(--muted-foreground));
+}
