@@ -20,7 +20,7 @@ import {
 
 import { Input } from '@/components/ui/input';
 
-import { deleteTodo, updateTodo } from '@/lib/handleTodos';
+import { deleteTodoinDB, updateTodoInDB } from '@/lib/handleTodos';
 import { EllipsisVertical } from 'lucide-react';
 import { useState } from 'react';
 import { useTodoContext } from '@/app/(private)/(providers)/TodoContext';
@@ -28,13 +28,22 @@ import { useUser } from '@clerk/nextjs';
 
 export const OptionsToggle = ({ todo }) => {
     const { fetchTodosForUser } = useTodoContext();
-
     const { user } = useUser();
 
     const [newValue, setNewValue] = useState('');
     const [isOpen, setIsOpen] = useState(false);
 
-    const updatedValue = { ...todo, todo: newValue };
+    const updateTodo = async () => {
+        const updatedValue = { ...todo, todo: newValue };
+        await updateTodoInDB(user, updatedValue);
+        fetchTodosForUser();
+        setIsOpen(false);
+    };
+
+    const deleteTodo = async () => {
+        await deleteTodoinDB(user, todo);
+        fetchTodosForUser();
+    };
 
     return (
         <Dialog
@@ -56,10 +65,7 @@ export const OptionsToggle = ({ todo }) => {
                     </DialogTrigger>
                     <DropdownMenuItem
                         className='text-red-800 hover:text-red-700 cursor-pointer'
-                        onClick={() => {
-                            deleteTodo(user, todo);
-                            fetchTodosForUser();
-                        }}>
+                        onClick={deleteTodo}>
                         Delete
                     </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -81,10 +87,7 @@ export const OptionsToggle = ({ todo }) => {
                         disabled={newValue.trim() == ''}
                         variant='special'
                         className='w-3/4 mx-auto mb-4 disabled:cursor-not-allowed'
-                        onClick={() => {
-                            updateTodo(updatedValue, user);
-                            setIsOpen(false);
-                        }}>
+                        onClick={updateTodo}>
                         Save changes
                     </Button>
                     <Button

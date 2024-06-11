@@ -6,7 +6,7 @@ import { OptionsToggle } from './options-toggle';
 import { useTodoContext } from '@/app/(private)/(providers)/TodoContext';
 
 const TodoItem = ({ todo }) => {
-    const { toggleCompletedLocally } = useTodoContext();
+    const { toggleCompleted } = useTodoContext();
 
     return (
         <TableRow>
@@ -21,12 +21,12 @@ const TodoItem = ({ todo }) => {
                         {todo.completed ? (
                             <CircleCheckBig
                                 className='size-5 transition cursor-pointer'
-                                onClick={() => toggleCompletedLocally(todo.id)}
+                                onClick={() => toggleCompleted(todo.id)}
                             />
                         ) : (
                             <CircleDashed
                                 className='size-5 transition hover:text-muted-foreground cursor-pointer'
-                                onClick={() => toggleCompletedLocally(todo.id)}
+                                onClick={() => toggleCompleted(todo.id)}
                             />
                         )}
                         <p
