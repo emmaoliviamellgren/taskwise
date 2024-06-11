@@ -4,7 +4,7 @@ import {
     toggleCompletedInDB,
     getRandomTodo,
     getTodosByUser,
-    addNewTodo,
+    addNewTodoInDB,
 } from '@/lib/handleTodos';
 import { useUser } from '@clerk/nextjs';
 import { createContext, useContext, useState, useEffect } from 'react';
@@ -21,12 +21,6 @@ const TodoContextProvider = ({ children }) => {
 
     const { user } = useUser();
 
-    // FETCH TODOS
-    const fetchTodosForUser = async () => {
-        const fetchedTodos = await getTodosByUser(user);
-        setTodos(fetchedTodos);
-    }
-
     useEffect(() => {
         if (user) {
             fetchTodosForUser(user);
@@ -38,10 +32,27 @@ const TodoContextProvider = ({ children }) => {
         console.log('Invalid input');
     };
 
+    // FETCH TODOS
+    const fetchTodosForUser = async () => {
+        const fetchedTodos = await getTodosByUser(user);
+        setTodos(fetchedTodos);
+    };
+
     // FETCH RANDOM TODOS FOR INSPIRATION IN INPUT BOX
     const fetchRandomTodo = async () => {
         const fetchedTodo = await getRandomTodo();
         setRandomTodo(fetchedTodo);
+    };
+
+    // ADD A NEW TODO
+    const addNewTodo = async () => {
+        try {
+            await addNewTodoInDB(user, inputValue);
+            setInputValue('');
+            setReloadTodos((prev) => !prev);
+        } catch (error) {
+            console.error('Error adding document: ', error);
+        }
     };
 
     // TOGGLE A TODO AS COMPLETED
@@ -53,19 +64,8 @@ const TodoContextProvider = ({ children }) => {
         setTodos(updatedStatus);
     };
 
-    // ADD A NEW TODO
-    const addToDatabase = async () => {
-        try {
-            await addNewTodo(user, inputValue);
-            setInputValue('');
-            setReloadTodos((prev) => !prev);
-        } catch (error) {
-            console.error('Error adding document: ', error);
-        }
-    };
-
     const value = {
-        addToDatabase,
+        addNewTodo,
         toggleCompleted,
         fetchRandomTodo,
         invalidInput,
