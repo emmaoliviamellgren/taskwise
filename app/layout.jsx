@@ -1,5 +1,6 @@
 import { ClerkProvider } from '@clerk/nextjs';
 import { ThemeProvider } from '@/app/(private)/(providers)/theme-provider';
+import { GeistSans } from 'geist/font/sans';
 import TodoContextProvider from './(private)/(providers)/TodoContext';
 import Head from 'next/head';
 
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
     return (
         <html
             lang='en'
+            className={GeistSans.className}
             suppressHydrationWarning>
             <Head>
                 <meta
@@ -22,8 +24,9 @@ export default function RootLayout({ children }) {
                 />
             </Head>
             <ClerkProvider>
-                <body className='flex flex-col h-screen overflow-auto antialiased'
-                suppressHydrationWarning>
+                <body
+                    className='flex flex-col h-screen overflow-auto antialiased'
+                    suppressHydrationWarning>
                     <TodoContextProvider>
                         <ThemeProvider
                             attribute='class'
