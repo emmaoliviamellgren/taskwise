@@ -7,7 +7,6 @@ Welcome to Taskwise! This todo web application allows users to manage their task
 - User Authentication (Signup, Login, Logout) with Clerk
 - Create, Read, Update, and Delete (CRUD) operations for todos
 - Responsive design
-- Persistent data storage with MongoDB
 
 ## Demo
 
