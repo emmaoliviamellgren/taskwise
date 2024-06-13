@@ -1,6 +1,6 @@
 # Taskwise
 
-Welcome to Taskwise! This todo web application, built using Next.js and MongoDB, allows users to manage their tasks efficiently by adding, updating, and deleting todo items.
+Welcome to Taskwise! This todo web application, built in Next.js, allows users to manage their tasks efficiently by adding, updating, and deleting todo items.
 
 ## Features
 
