@@ -10,7 +10,7 @@ Welcome to Taskwise! This todo web application allows users to manage their task
 
 ## Demo
 
-You can check out a live demo of the application [here](#https://taskwise.vercel.app/).
+You can check out a live demo of the application [here](https://taskwise.vercel.app/).
 
 ## Usage
 
