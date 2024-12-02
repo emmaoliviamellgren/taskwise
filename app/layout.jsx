@@ -22,10 +22,6 @@ export default function RootLayout({ children }) {
                     name='viewport'
                     content='width=device-width, initial-scale=1, maximum-scale=1'
                 />
-                <meta property='og:title' content='TaskWise' />
-                <meta property='og:image' content='//media.example.com/1234567.jpg' />
-                <meta property='og:description' content='A simple and intuitive todo-application' />
-                <meta property='og:url' content='//www.example.com/' />
             </Head>
             <ClerkProvider>
                 <body
