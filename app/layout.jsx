@@ -17,12 +17,16 @@ export default function RootLayout({ children }) {
             lang='en'
             className={GeistSans.className}
             suppressHydrationWarning>
-            {/* <Head>
+            <Head>
                 <meta
                     name='viewport'
                     content='width=device-width, initial-scale=1, maximum-scale=1'
                 />
-            </Head> */}
+                <meta property='og:title' content='TaskWise' />
+                <meta property='og:image' content='//media.example.com/1234567.jpg' />
+                <meta property='og:description' content='A simple and intuitive todo-application' />
+                <meta property='og:url' content='//www.example.com/' />
+            </Head>
             <ClerkProvider>
                 <body
                     className='flex flex-col h-screen overflow-auto antialiased'
