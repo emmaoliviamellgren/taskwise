@@ -7,7 +7,7 @@ import Head from 'next/head';
 import './globals.css';
 
 export const metadata = {
-    title: 'TODO-APP',
+    title: 'TaskWise',
     description: 'A simple and intuitive todo-application',
 };
 
@@ -17,12 +17,12 @@ export default function RootLayout({ children }) {
             lang='en'
             className={GeistSans.className}
             suppressHydrationWarning>
-            <Head>
+            {/* <Head>
                 <meta
                     name='viewport'
                     content='width=device-width, initial-scale=1, maximum-scale=1'
                 />
-            </Head>
+            </Head> */}
             <ClerkProvider>
                 <body
                     className='flex flex-col h-screen overflow-auto antialiased'
